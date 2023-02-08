@@ -1,0 +1,25 @@
+/* body {
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+:root {
+  background-image: url("https://content.hijingo.com/wp-content/uploads/2022/10/Hijingo_NewMenu-2000px-282A2532.jpg");
+  width: 100vw;
+  height: 100nh;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-position: center;
+  background-attachment: fixed;
+}
