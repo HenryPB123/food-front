@@ -22,7 +22,6 @@ export const Diets = () => {
   let scores = recetas?.map((r) => {
     return r.healthScore;
   });
-  console.log("score", scores);
   return (
     <div>
       <h1>recetas</h1>

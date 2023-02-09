@@ -23,9 +23,9 @@ export const SearchBar = () => {
   }
 
   return (
-    <form className="d-flex m-1 me-3 ">
+    <form className="d-flex  me-3 border border-white p-2">
       <input
-        className="form-control me-2 border border-white"
+        className="form-control me-2 "
         type="search"
         placeholder="Search"
         // aria-label="Search"

@@ -18,6 +18,7 @@ import Select from "./Select";
 import SelectOrder from "./SelectOrder";
 import SelectScore from "./SelectScore";
 import ButtonRecepis from "./ButtonRecepis";
+import ButtonCreateRecipe from "./ButtonCreateRecipe";
 
 let prevId = 1;
 
@@ -36,12 +37,12 @@ export const Home = () => {
   const indexOfLastCard = currentPage * cardPerPage;
   const indexOfFirstCard = indexOfLastCard - cardPerPage;
 
-  var currentData = allRecipes.slice(indexOfFirstCard, indexOfLastCard);
+  let currentData = allRecipes.slice(indexOfFirstCard, indexOfLastCard);
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  console.log(currentPage === indexOfLastCard / cardPerPage);
   useEffect(() => {
     dispatch(getRecetas());
   }, [dispatch]);
@@ -68,35 +69,27 @@ export const Home = () => {
   }
 
   const handleFilter = (e) => {
-    console.log("EE", e.target.value);
     dispatch(filterByDiets(e.target.value));
   };
 
   return (
-    <div className="container1">
+    <div className="container-fluid bg-black bg-opacity-75">
       <nav className="navbar navbar-dark bg-dark">
         <div className="input-group mb-3  m-3">
           <SearchBar />
           <ButtonRecepis handleClick={handleClick} />
           <SelectOrder handleSort={handleSort} />
           <SelectScore handleScore={handleScore} />
-          <Select handleFilter={handleFilter} />{" "}
-          <Link
-            className="btn btn-warning me-4 border border-white"
-            to="/recipeCreate"
-          >
-            Create Recipe
-          </Link>
+          <Select handleFilter={handleFilter} />
+          <ButtonCreateRecipe />
         </div>
       </nav>
-
-      <div className="recipe">
-        {recipe.length > 0 ? (
-          recipe.map((r) => {
-            return (
-              <div className="card-container">
-                <div className="recipe-card" key={prevId++}>
-                  <div className="container-card">
+      <div className="container mt-4  ">
+        <div className="row row_a">
+          {recipe.length > 0
+            ? recipe.map((r) => {
+                return (
+                  <div className="col-4 ">
                     <Card
                       image={r.image}
                       name={r.name}
@@ -105,16 +98,11 @@ export const Home = () => {
                       id={r.id}
                     />
                   </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="card-container">
-            {currentData?.map((r) => {
-              return (
-                <div className="recipe-card" key={prevId++}>
-                  <div className="container-card">
+                );
+              })
+            : currentData?.map((r) => {
+                return (
+                  <div className="col-4  ">
                     <Card
                       key={r.id}
                       image={r.image}
@@ -130,27 +118,29 @@ export const Home = () => {
                       id={r.id}
                     />
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+          <div className=" container_pag ">
+            {isActive
+              ? recipe.length > 8 && (
+                  <Pagination
+                    cardPerPage={cardPerPage}
+                    totalCards={allRecipes.length}
+                    pagination={pagination}
+                    currentPage={currentPage}
+                  />
+                )
+              : currentData && (
+                  <Pagination
+                    cardPerPage={cardPerPage}
+                    totalCards={allRecipes.length}
+                    pagination={pagination}
+                    currentPage={currentPage}
+                  />
+                )}
           </div>
-        )}
+        </div>{" "}
       </div>
-      {isActive
-        ? recipe.length > 8 && (
-            <Pagination
-              cardPerPage={cardPerPage}
-              totalCards={allRecipes.length}
-              pagination={pagination}
-            />
-          )
-        : currentData && (
-            <Pagination
-              cardPerPage={cardPerPage}
-              totalCards={allRecipes.length}
-              pagination={pagination}
-            />
-          )}
     </div>
   );
 };

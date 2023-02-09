@@ -10,7 +10,10 @@ const Select = ({ handleFilter }) => {
   }, [dispatch]);
 
   return (
-    <select className="form-select bg-white " onChange={(e) => handleFilter(e)}>
+    <select
+      className="form-select bg-warning "
+      onChange={(e) => handleFilter(e)}
+    >
       <option value="">Diets</option>
       {diets?.map((d, i) => (
         <option key={i} value={d}>

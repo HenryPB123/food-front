@@ -1,19 +1,24 @@
 import React from "react";
 import "./paginado.css";
 
-export default function Pagination({ cardPerPage, totalCards, pagination }) {
+export default function Pagination({
+  cardPerPage,
+  totalCards,
+  pagination,
+  currentPage,
+}) {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalCards / cardPerPage); ++i) {
     pageNumbers.push(i);
   }
 
   return (
-    <nav aria-label="...">
+    <nav>
       <ul className="pagination pagination-lg">
         {pageNumbers.length <= 1 ? (
           <></>
         ) : (
-          <nav aria-label="...">
+          <nav>
             <ul className="pagination pagination-lg">
               {pageNumbers?.map((p, i) => (
                 <li
@@ -21,7 +26,13 @@ export default function Pagination({ cardPerPage, totalCards, pagination }) {
                   className="page-item "
                   onClick={() => pagination(p)}
                 >
-                  <button className="page-link bg-black text-warning fw-bolder bg-gradient ">
+                  <button
+                    className={
+                      p === currentPage
+                        ? "page-link bg-warning text-dark fw-bolder  border border-warning "
+                        : "page-link bg-dark text-warning fw-bolder  border border-warning "
+                    }
+                  >
                     {p}
                   </button>
                 </li>
