@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  ADD_RECIPE,
   CLEAN,
   FILTER_BY_DIETS,
   GET_DETAILS,
@@ -89,14 +90,29 @@ export function getDetails(id) {
         console.log(error);
       });
 }
-
 export function addRecipes(payload) {
-  return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/recipes", payload);
-
-    return response;
-  };
+  return (dispatch) =>
+    axios
+      .post("http://localhost:3001/recipes", payload)
+      .then((response) => {
+        dispatch({
+          type: ADD_RECIPE,
+          payload: response.data, //la respuesta la recibo en un data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 }
+
+// export function addRecipes(payload) {
+//   return async function (dispatch) {
+//     const response = await axios.post("http://localhost:3001/recipes", payload);
+
+//     return response;
+//   };
+// }
+
 export function Clean() {
   return {
     type: CLEAN,

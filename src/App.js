@@ -2,7 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import LandingPage from "./components/landing/LandingPage";
 import Home from "./components/home/Home";
 import Details from "./components/details/Details";
-import RecipeCreate from "./components/form/Form";
+import RecipeCreate from "./components/form/RecipeCreate";
 
 function App() {
   return (

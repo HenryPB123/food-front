@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import SearchBar from "../searchBar/SearchBar";
 import Card from "../card/Card";
 import Pagination from "../pagination/Pagination";
-import "../home/home.css";
+import "../home/home.scss";
 
 import {
   filterByDiets,
@@ -19,8 +18,6 @@ import SelectOrder from "./SelectOrder";
 import SelectScore from "./SelectScore";
 import ButtonRecepis from "./ButtonRecepis";
 import ButtonCreateRecipe from "./ButtonCreateRecipe";
-
-let prevId = 1;
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -139,7 +136,7 @@ export const Home = () => {
                   />
                 )}
           </div>
-        </div>{" "}
+        </div>
       </div>
     </div>
   );

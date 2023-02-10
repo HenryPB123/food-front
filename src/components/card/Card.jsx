@@ -7,7 +7,7 @@ import "../card/card.scss";
 
 export default function Card({ image, name, dietsType, healthScore, id }) {
   return (
-    <div className="card bg-white bg-opacity-25 text-white  border-white mb-3  card_con">
+    <div className="card bg-white bg-opacity-25 text-warning  border-white mb-3  card_con">
       {image ? (
         <img src={`${image}`} className="card-img-top" alt="..." />
       ) : (
@@ -15,7 +15,7 @@ export default function Card({ image, name, dietsType, healthScore, id }) {
       )}
       <div className="card-body card_bo  ">
         <Link
-          className=" text-decoration-none text-white "
+          className=" text-decoration-underline text-warning "
           to={`/recipe/${id}`}
         >
           <h6 className="card-title fw-bolder">{name}</h6>

@@ -4,10 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import imagen from "../../img/cooking.png";
-import "./detail.css";
 import { Clean, getDetails } from "../../redux/actions/actions";
-
-let prevId = 1;
 
 export const Details = () => {
   const dispatch = useDispatch();
@@ -24,70 +21,72 @@ export const Details = () => {
   }, []);
 
   return (
-    <div key={prevId++} className="container2">
-      <div className="detail-p">
-        {detailRecipe ? (
-          <div className="recipe-detail">
-            <h2 className="name1">{detailRecipe.name}</h2>
+    <div
+      key={detailRecipe.id}
+      className="container-fluid bg-black bg-opacity-75 p-5 text-warning   "
+    >
+      {detailRecipe ? (
+        <div className="container col-8 border border-warning">
+          <div className="h1 text-center p-3">{detailRecipe.name}</div>
+          <hr />
+          {detailRecipe.image ? (
+            <div className="text-center mb-3">
+              <img className="rounded" src={detailRecipe.image} alt="recipe" />
+            </div>
+          ) : (
+            <div className="text-center mb-3">
+              <img className="rounded" src={imagen} alt="recipe" />
+            </div>
+          )}
+          <hr />
+          <div className="container col-12 bg-white bg-opacity-10 p-5 pb-3 pt-1 mb-3 ">
+            <div className="m-1">
+              <strong>DishTypes</strong>: {`${detailRecipe.dishTypes}`}
+            </div>
 
-            {detailRecipe.image ? (
-              <div>
-                <img className="image" src={detailRecipe.image} alt="recipe" />
-              </div>
-            ) : (
-              <div>
-                <img className="image" src={imagen} alt="recipe" />
-              </div>
-            )}
-            <div>
-              <div className="text1">
-                <strong>DishTypes</strong>: {`${detailRecipe.dishTypes}`}
-              </div>
+            <div className="m-1">
+              <strong>DietsType</strong>:
+              {detailRecipe.dietsType
+                ? detailRecipe.dietsType.map((d) => <span> {`  ${d}`},</span>)
+                : detailRecipe.diets?.map((d) =>
+                    d.name.map((n) => <span> {`  ${n} -`},</span>)
+                  )}
+            </div>
 
-              <div className="text1">
-                <strong>DietsType</strong>:
-                {detailRecipe.dietsType
-                  ? detailRecipe.dietsType.map((d) => <div>{d}</div>)
-                  : detailRecipe.diets?.map((d) =>
-                      d.name.map((n) => <div>{n}</div>)
-                    )}
-              </div>
-              {/* las dietas de la api llegaban con el nombre dietstype y las de la db con el nombre diets pero dentro de un onj llamado name  */}
+            <div className="m-1">
+              <strong>HealthScore</strong>: {`${detailRecipe.healthScore}`}
+            </div>
 
-              <div className="text1">
-                <strong>HealthScore</strong>: {`${detailRecipe.healthScore}`}
-              </div>
+            <div className="m-1">
+              <strong>Summary</strong>:{" "}
+              {`${detailRecipe.summary?.replace(/<[^>]*>/g, "")}`}
+            </div>
 
-              <div className="text1">
-                <strong>Summary</strong>:{" "}
-                {`${detailRecipe.summary?.replace(/<[^>]*>/g, "")}`}
-              </div>
-
-              <div className="text1">
-                <strong>Steps</strong>
-                <ul>
-                  {detailRecipe.steps &&
-                    detailRecipe.steps.map((d) =>
-                      typeof d !== "object" ? (
-                        <li key={prevId++}> {d} </li>
-                      ) : (
-                        <li key={prevId++}> {`${d.number} - ${d.step} `} </li>
-                      )
-                    )}
-                </ul>
-              </div>
-              {/* los pasos de la db estan llegando en un objeto y los de la api en un string */}
-              <div>
-                <Link to="/Home">
-                  <button className="back-button">Back</button>
-                </Link>
-              </div>
+            <div className="m-1">
+              <strong>Steps</strong>
+              <ul>
+                {detailRecipe.steps &&
+                  detailRecipe.steps.map((d, i) =>
+                    typeof d !== "object" ? (
+                      <li key={i}> {d} </li>
+                    ) : (
+                      <li key={i}> {`${d.number} - ${d.step} `} </li>
+                    )
+                  )}
+              </ul>
+            </div>
+            <div className="text-center mb-0">
+              <Link to="/Home" className="d-grid gap-2  text-decoration-none">
+                <button className="btn btn-warning fw-bolder fs-2 ">
+                  Back
+                </button>
+              </Link>
             </div>
           </div>
-        ) : (
-          <div>Loading...</div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="container">Loading...</div>
+      )}
     </div>
   );
 };

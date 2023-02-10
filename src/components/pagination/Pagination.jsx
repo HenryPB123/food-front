@@ -1,5 +1,4 @@
 import React from "react";
-import "./paginado.css";
 
 export default function Pagination({
   cardPerPage,

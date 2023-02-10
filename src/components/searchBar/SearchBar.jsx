@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchRecipesName } from "../../redux/actions/actions";
 
-import "./searchbar.css";
-
 export const SearchBar = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();

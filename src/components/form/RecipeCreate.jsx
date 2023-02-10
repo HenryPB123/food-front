@@ -2,8 +2,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addRecipes, getDiets } from "../actions/actions";
 import { Link } from "react-router-dom";
+import { addRecipes, getDiets } from "../../redux/actions/actions";
 import "./create.css";
 
 export default function RecipeCreate() {
@@ -68,7 +68,6 @@ export default function RecipeCreate() {
   }
 
   function handleSteps(e) {
-    console.log(e);
     setText(e.target.value);
   }
 
@@ -88,7 +87,6 @@ export default function RecipeCreate() {
       ...input,
       [e.target.name]: e.target.value,
     });
-    console.log(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -116,15 +114,6 @@ export default function RecipeCreate() {
       dieta: dietas,
     });
   }
-
-  console.log(
-    errorName.length === 0 ||
-      errorSummary.length === 0 ||
-      errorSteps.length === 0 ||
-      errorHealth.length === 0 ||
-      errorImage.length === 0
-  );
-  console.log(errorName.length, errorName);
 
   return (
     <div className="container3">
@@ -254,8 +243,8 @@ export default function RecipeCreate() {
               </select>
             </div>
             {input.dieta.length > 0 &&
-              input.dieta.map((diet) => (
-                <div>
+              input.dieta.map((diet, i) => (
+                <div key={i}>
                   {diet}
                   <button
                     onClick={() => {
